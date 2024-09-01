@@ -26,15 +26,26 @@ class Designer {
   }
 }
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  int count = 0;
+
   void decrement() {
-    //TODO
+    setState(() {
+      count--;
+    });
   }
 
   void increment() {
-    //TODO
+    setState(() {
+      count++;
+    });
   }
 
   @override
@@ -51,11 +62,11 @@ class Homepage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(40),
+            Padding(
+              padding: const EdgeInsets.all(40),
               child: Text(
-                '0',
-                style: TextStyle(
+                count.toString(),
+                style: const TextStyle(
                   fontSize: 100,
                   color: Colors.white,
                 ),
