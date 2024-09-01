@@ -37,7 +37,7 @@ class _HomepageState extends State<Homepage> {
   int count = 0;
 
   static SnackBar unsignedLimit = const SnackBar(
-    content: Text('zero limit'),
+    content: Text('The counter cannot be less than zero'),
     behavior: SnackBarBehavior.floating,
   );
 
