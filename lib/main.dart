@@ -43,7 +43,7 @@ class _HomepageState extends State<Homepage> {
 
   void decrement() {
     setState(() {
-      if (count <= 0) {
+      if (isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(unsignedLimit);
       } else {
         count--;
@@ -57,16 +57,20 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
+  bool get isEmpty => count <= 0;
+
+  bool get isFull => count >= 20;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: isFull ? Colors.red : Colors.green,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Authorized entry',
-            style: TextStyle(
+          Text(
+            isFull ? 'Full' : 'Authorized entry',
+            style: const TextStyle(
               fontSize: 30,
               color: Colors.white,
             ),
