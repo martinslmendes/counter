@@ -36,9 +36,18 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   int count = 0;
 
+  static SnackBar unsignedLimit = const SnackBar(
+    content: Text('zero limit'),
+    behavior: SnackBarBehavior.floating,
+  );
+
   void decrement() {
     setState(() {
-      count--;
+      if (count <= 0) {
+        ScaffoldMessenger.of(context).showSnackBar(unsignedLimit);
+      } else {
+        count--;
+      }
     });
   }
 
@@ -51,49 +60,50 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.green,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Authorized entry',
-              style: TextStyle(
-                fontSize: 30,
+      backgroundColor: Colors.green,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Authorized entry',
+            style: TextStyle(
+              fontSize: 30,
+              color: Colors.white,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(40),
+            child: Text(
+              count.toString(),
+              style: const TextStyle(
+                fontSize: 100,
                 color: Colors.white,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(40),
-              child: Text(
-                count.toString(),
-                style: const TextStyle(
-                  fontSize: 100,
-                  color: Colors.white,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: decrement,
+                style: Designer.buttonStyle(),
+                child: const Icon(
+                  Icons.remove,
+                  color: Colors.black,
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: decrement,
-                  style: Designer.buttonStyle(),
-                  child: const Icon(
-                    Icons.remove,
-                    color: Colors.black,
-                  ),
+              TextButton(
+                onPressed: increment,
+                style: Designer.buttonStyle(),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.black,
                 ),
-                TextButton(
-                  onPressed: increment,
-                  style: Designer.buttonStyle(),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ));
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
