@@ -1,3 +1,3 @@
 # counter
 
-A simple counter for use on limited people capacity environments
+A simple counter Android app for use on limited people capacity environments
